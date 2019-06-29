@@ -81,6 +81,9 @@ api.add_resource(FollowRequest, '/send/request/now/event-<string:id>',resource_c
 
 api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'data':mysql_connection})
 
+print("Hello World")
+#How are you 
+print("Hello world 2")
 
 if __name__ == '__main__':
     app.run(host="192.168.70.15",debug=False)   
