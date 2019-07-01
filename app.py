@@ -2,6 +2,10 @@ from flask import Flask
 from flask_restful import Resource, Api
 #import MySQLdb as mysql
 import pymysql as mysql
+from threading import Thread
+from time import sleep 
+import datetime
+#----------------------------------------#
 from Registration.registration import *
 from EventDetails.EventDetails import *
 from LogingIn.LoginIn import *
@@ -27,7 +31,20 @@ app = Flask(__name__)
 
 api = Api(app,prefix='/v0')
 
-mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1",connect_timeout=1)  
+mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1") 
+#mysql_connection.begin()
+def refreshConnection():
+    while True:
+        sleep(5)
+        global mysql_connection
+        # mysql_connection.close()
+        # mysql_connection.begin()
+        mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
+        print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" - - New Connection to mysql extablished")
+        sleep(7200)
+
+Thread(target=refreshConnection).start()
+
 #mysql_connection = mysql.connect(host='',user='test2', password='Test@123', database="dbtest")  
 
 
@@ -79,14 +96,13 @@ api.add_resource(EditAttendeeInfo, '/update/attendee/details',resource_class_kwa
 
 api.add_resource(FollowRequest, '/send/request/now/event-<string:id>',resource_class_kwargs={'data':mysql_connection})
 
-api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'data':mysql_connection})
+api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'data':mysql_connection}) 
 
-print("Hello World")
-#How are you 
-print("Hello world 2")
 
 if __name__ == '__main__':
     app.run(host="192.168.70.15",debug=False)   
+
+
 
 
     

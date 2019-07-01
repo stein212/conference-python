@@ -19,7 +19,7 @@ def verify(userName,password):
 
 @auth.error_handler
 def errorMsg():
-    return jsonify({"Error_msg":"Unauthorized Connection"})
+    return jsonify({"Error_msg":"Unauthorized Connection"})  
 
 class SimilarAttendees(Resource):
     def __init__(self, **kwargs):
@@ -37,8 +37,8 @@ class SimilarAttendees(Resource):
             result = lookForMutualSpeakers(tag,self.data)
             attendees.append(result)
         return attendeeListGenerator(filterAttendees(attendees,id))  
-        print(request.headers.get("tags"))
-        return {"msg":"ok"}   
+        #print(request.headers.get("tags")) 
+
 
 
 def lookForAttendees(tag,db):

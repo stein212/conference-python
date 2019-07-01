@@ -37,33 +37,39 @@ class UploadPicTags(Resource):
         print(request.headers)
         if 'file' not in request.files:
             try:
-                tags = request.form["tags"]
-                jso = json.loads(tags) 
-                return setTag(id,jso,self.data)
+                # tags = request.form["tags"]
+                # jso = json.loads(tags) 
+                # return setTag(id,jso,self.data)
+                return {"Error_msg":"Image cannot be uploaded { 1 }."},400
             except:
-                return {"msg":6}    
+                return {"Error_msg":"Image cannot be uploaded { 2 }."},400
         else:
             file = request.files["file"]
-            tags = request.form["tags"]
-            if file.filename == " ":
-                jso = json.loads(tags) 
-                return setTag(id,jso,self.data) 
+            
+            # if file.filename == " ":
+            #     jso = json.loads(tags) 
+            #     return setTag(id,jso,self.data) 
             try:
                 if file and allowedExtension(file.filename):
                     fileName = str(id)+"_"+secure_filename(file.filename) 
                     file.save(os.path.join(UPLOAD_FOLDER,fileName))
-                    jso = json.loads(tags) 
-                    data = setTagAndImageName(id,jso,fileName,self.data) 
+                    
+                    data = setTagAndImageName(id,fileName,self.data) 
                     print(data) 
-                    return {"msg":1},200
+                    return data,200
+                    
                 else:
-                    jso = json.loads(tags) 
-                    data = setTag(id,jso,self.data)
-                    return {"msg":2}
+                    # jso = json.loads(tags) 
+                    # data = setTag(id,jso,self.data)
+                    return {"Error_msg":"Image cannot be uploaded."},400
+
             except:
-                jso = json.loads(tags) 
-                data = setTag(id,jso,self.data) 
-                return {"msg":3} 
+                # jso = json.loads(tags) 
+                # data = setTag(id,jso,self.data) 
+                # return {"msg":3} 
+                return {"Error_msg":"Image cannot be uploaded."},400
+
+
 
 def setTag(id,tags,DB):
     print(tags)
@@ -75,12 +81,12 @@ def setTag(id,tags,DB):
     DB.commit()
     return {"msg":5}
 
-def setTagAndImageName(id,tags,name,db):
-    print(tags)
-    query = "UPDATE attendee SET attendee_tags = %s , prof_img = %s WHERE id = %s" 
-    val = (json.dumps(tags),name,str(id))  
+def setTagAndImageName(id,name,db):
+    
+    query = "UPDATE attendee SET prof_img = %s WHERE id = %s" 
+    val = (name,str(id))  
     print(val)
     cursor = db.cursor()  
     cursor.execute(query,val) 
     db.commit()
-    return {"msg":5}    
+    return {"msg":1}    
