@@ -28,8 +28,27 @@ class SimilarAttendees(Resource):
 
     @auth.login_required
     def get(self,id):
-        tags = request.headers.get("tags")
-        print(tags)
+        data = request.args.get("tags")
+        print("........")
+        tags = json.loads(data)
+        if tags == None:
+            tags = []
+        attendees = []
+        for tag in tags:
+            result = lookForAttendees(tag,self.data)
+            attendees.append(result)
+        return attendeeListGenerator(filterAttendees(attendees,id))  
+        #print(request.headers.get("tags")) 
+
+class SimilarSpeakers(Resource):
+    def __init__(self, **kwargs):
+        self.data = kwargs['data']
+        #mysql_connection = self.data
+
+    @auth.login_required
+    def get(self,id):
+        tags = request.args.get("tags")
+        print(tags)  
         if tags == None:
             tags = []
         attendees = []
@@ -42,6 +61,7 @@ class SimilarAttendees(Resource):
 
 
 def lookForAttendees(tag,db):
+    print(tag)
     query = "SELECT * FROM dbtest1.attendee WHERE attendee_tags LIKE '%{0}%';".format(tag)  
     cursor = db.cursor()
     cursor.execute(query)
@@ -55,8 +75,12 @@ def lookForAttendees(tag,db):
         tags = []
         if x["attendee_tags"] != None: 
             links = json.loads(x["attendee_tags"]) 
-        data = {"speaker_id":x["speaker_id"],"role":x["attendee_synopsis"],"id":x["id"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"speaker_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}
-        result.append(data)
+        data = {"speaker_id":x["id"],"id":x["id"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"speaker_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}
+        if(len(data["links"]) == 0):
+            print(data)
+        else:
+            result.append(data)
+        
     return result
 
 def filterAttendees(attendeesDetail,id):
@@ -67,7 +91,7 @@ def filterAttendees(attendeesDetail,id):
     try:
         del data[id]
     except:
-        print(data)
+        #print(data)
         print("Not available")            
     return data   
 

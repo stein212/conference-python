@@ -15,7 +15,7 @@ class AddTags(Resource):
         for x in parse["tags"]:
             print(x)
             searchTags(x,parse,self.db)
-        return setTag(parse["tags"],id,self.db)            
+        return setTag(parse["tags"],id,self.db)             
         
 def searchTags(tag,parse,db):
     query = "SELECT * FROM attendee_tag WHERE tag_name = %s AND event_id = %s"
@@ -40,8 +40,7 @@ def setTag(tags,id,db):
     cursor = db.cursor()
     cursor.execute(query2,val2)
     db.commit()
-
-    return checkTagUpdate(tags,id,db)
+    return checkTagUpdate(tags,id,db) 
 
 def checkTagUpdate(tags,id,db):
     query = "SELECT * FROM attendee WHERE id = {0}".format(str(id))
