@@ -35,13 +35,13 @@ mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='passwor
 #mysql_connection.begin()
 def refreshConnection():
     while True:
-        sleep(5)
+        sleep(7200)
         global mysql_connection
         # mysql_connection.close()
         # mysql_connection.begin()
         mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
         print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" - - New Connection to mysql extablished")
-        sleep(7200)
+        
 
 Thread(target=refreshConnection).start()
 

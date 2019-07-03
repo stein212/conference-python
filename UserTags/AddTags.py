@@ -7,17 +7,20 @@ import datetime
 
 class AddTags(Resource):
     def __init__(self,**kwargs):
-        self.db = kwargs["data"]
+        self.db = kwargs["data"]        
 
     def post(self,id):
         parse = request.get_json(force = True)
+        print(parse)
         for x in parse["tags"]:
-            searchTags(x,self.db)
+            print(x)
+            searchTags(x,parse,self.db)
+        return setTag(parse["tags"],id,self.db)            
         
-def searchTags(tag,db):
-    query = "SELECT * FROM attendee_tag WHERE tag_name = %s"
+def searchTags(tag,parse,db):
+    query = "SELECT * FROM attendee_tag WHERE tag_name = %s AND event_id = %s"
     cursor = db.cursor()
-    val = (str(tag))
+    val = (str(tag),str(parse["eventId"]))
     cursor.execute(query,val)
     item = cursor.fetchall()
     if len(item) == 0 :
@@ -26,11 +29,28 @@ def searchTags(tag,db):
         cursor = db.cursor()
         cursor.execute(query2,val2)
         db.commit()
+    else:
+        nos = item[0][3]  
+        print(item)  
 
 def setTag(tags,id,db):
     query2 = "UPDATE attendee SET attendee_tags = %s WHERE id = %s"
-    val2 = (str(tags),id)
+    val2 = (json.dumps(tags),id)
+    print(val2)
     cursor = db.cursor()
     cursor.execute(query2,val2)
     db.commit()
+
+    return checkTagUpdate(tags,id,db)
+
+def checkTagUpdate(tags,id,db):
+    query = "SELECT * FROM attendee WHERE id = {0}".format(str(id))
+    cursor = db.cursor()
+    cursor.execute(query)
+    item = cursor.fetchall()
+    items = [dict(zip([key[0] for key in cursor.description],row))for row in item]
+    if(items[0]["attendee_tags"] == json.dumps(tags)):
+        return {"msg":"Success"}
+    else:
+        return {"Error_msg":"Not updated"}    
 

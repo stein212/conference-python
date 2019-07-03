@@ -13,11 +13,14 @@ class UserTags(Resource):
         #mysql_connection = self.data
     
     def get(self,id):
-        data = getTagList(id,self.data)
-        list_of_tags = {"tag":[]}
-        for x in data:
-            list_of_tags["tag"].append({"tagName":x[1],"count":x[3],"tagId":x[0]}) 
-        return list_of_tags,200    
+        try:
+            data = getTagList(id,self.data)
+            list_of_tags = {"tag":[]}
+            for x in data:
+                list_of_tags["tag"].append({"tagName":x[1],"count":x[3],"tagId":x[0]}) 
+            return {"msg":list_of_tags},200 
+        except:
+            return {"Error_msg":"Exception error"},500   
 
 
 def getTagList(id,DB):
