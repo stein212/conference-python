@@ -31,7 +31,8 @@ app = Flask(__name__)
 
 api = Api(app,prefix='/v0')
 
-mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1") 
+mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
+
 #mysql_connection.begin()
 def refreshConnection():
     while True:
@@ -40,7 +41,7 @@ def refreshConnection():
         # mysql_connection.close()
         # mysql_connection.begin()
         mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
-        print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" - - New Connection to mysql extablished")
+        print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" - - New Connection to mysql extablished") 
         
 
 Thread(target=refreshConnection).start()

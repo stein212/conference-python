@@ -1,1 +1,1 @@
-baseDirectory = "/users/apple/python/isls/"
+baseDirectory = "/opt/isls/isls/"

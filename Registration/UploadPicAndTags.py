@@ -5,11 +5,12 @@ from flask_restful import Resource, Api
 import json
 import pymysql as mysql
 from flask_httpauth import HTTPBasicAuth
+from CommonVariables.commonvariables import *
 
 #mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-UPLOAD_FOLDER = "/users/apple/python/isls/profilePic/profPic"
+UPLOAD_FOLDER = baseDirectory+"profilePic/profPic"
 
 
 def allowedExtension(fileName):
