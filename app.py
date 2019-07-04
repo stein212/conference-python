@@ -100,7 +100,7 @@ api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'da
 
 
 if __name__ == '__main__':
-    app.run(host="192.168.70.15",debug=False)   
+    app.run(host="192.168.70.15",debug=True)   
 
 
 
