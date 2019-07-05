@@ -29,13 +29,14 @@ class SimilarAttendees(Resource):
     @auth.login_required
     def get(self,id):
         data = request.args.get("tags")
+        eventId = request.args.get("eventId")
         print("........")
         tags = json.loads(data)
         if tags == None:
             tags = []
         attendees = []
         for tag in tags:
-            result = lookForAttendees(tag,self.data)
+            result = lookForAttendees(tag,eventId,self.data)
             attendees.append(result)
         return attendeeListGenerator(filterAttendees(attendees,id))  
         #print(request.headers.get("tags")) 
@@ -48,21 +49,21 @@ class SimilarSpeakers(Resource):
     @auth.login_required
     def get(self,id):
         tags = request.args.get("tags")
+        eventId = request.args.get("eventId")
         print(tags)  
         if tags == None:
             tags = []
         attendees = []
         for tag in tags:
-            result = lookForMutualSpeakers(tag,self.data)
+            result = lookForMutualSpeakers(tag,eventId,self.data)
             attendees.append(result)
         return attendeeListGenerator(filterAttendees(attendees,id))  
         #print(request.headers.get("tags")) 
 
 
-
-def lookForAttendees(tag,db):
+def lookForAttendees(tag,eventId,db):
     print(tag)
-    query = "SELECT * FROM dbtest1.attendee WHERE attendee_tags LIKE '%{0}%';".format(tag)  
+    query = "SELECT * FROM dbtest1.attendee WHERE attendee_tags LIKE '%{0}%' AND event_id = '{1}';".format(tag,str(eventId))  
     cursor = db.cursor()
     cursor.execute(query)
     result1 = cursor.fetchall()
@@ -75,7 +76,7 @@ def lookForAttendees(tag,db):
         tags = []
         if x["attendee_tags"] != None: 
             links = json.loads(x["attendee_tags"]) 
-        data = {"speaker_id":x["id"],"id":x["id"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"speaker_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}
+        data = {"speaker_id":x["id"],"id":x["id"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"profile_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}
         if(len(data["links"]) == 0):
             print(data)
         else:
@@ -101,8 +102,8 @@ def attendeeListGenerator(data):
         attendeeList.append(x) 
     return attendeeList
 
-def lookForMutualSpeakers(tag,db):
-    query = "SELECT attendee.* , speaker.* FROM attendee INNER JOIN speaker ON attendee.id = speaker.speaker_id WHERE attendee.attendee_tags LIKE '%{0}%'".format(tag)
+def lookForMutualSpeakers(tag,eventId,db):
+    query = "SELECT attendee.* , speaker.* FROM attendee INNER JOIN speaker ON attendee.id = speaker.speaker_id WHERE attendee.attendee_tags LIKE '%{0}%' AND event_id = '{1}'".format(tag,str(eventId))
     cursor = db.cursor()
     cursor.execute(query)
     result1 = cursor.fetchall()
@@ -115,7 +116,7 @@ def lookForMutualSpeakers(tag,db):
         tags = []
         if x["attendee_tags"] != None: 
             tags = json.loads(x["attendee_tags"]) 
-        data = {"speaker_id":x["speaker_id"],"role":x["role"],"id":x["id_number"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"speaker_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}
-        result.append(data) 
-    return result
+        data = {"speaker_id":x["speaker_id"],"role":x["role"],"id":x["id_number"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"profile_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}
+        result.append(data)   
+    return result 
 
