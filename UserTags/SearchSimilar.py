@@ -48,15 +48,15 @@ class SimilarSpeakers(Resource):
 
     @auth.login_required
     def get(self,id):
-        tags = request.args.get("tags")
+        # tags = request.args.get("tags")
         eventId = request.args.get("eventId")
-        print(tags)  
-        if tags == None:
-            tags = []
         attendees = []
-        for tag in tags:
-            result = lookForMutualSpeakers(tag,eventId,self.data)
-            attendees.append(result)
+        # if tags == None:
+        #     tags = []
+        # 
+        # for tag in tags:
+        result = lookForMutualSpeakers(eventId,self.data)
+        attendees.append(result)
         return attendeeListGenerator(filterAttendees(attendees,id))  
         #print(request.headers.get("tags")) 
 
@@ -81,7 +81,6 @@ def lookForAttendees(tag,eventId,db):
             print(data)
         else:
             result.append(data)
-        
     return result
 
 def filterAttendees(attendeesDetail,id):
@@ -102,11 +101,13 @@ def attendeeListGenerator(data):
         attendeeList.append(x) 
     return attendeeList
 
-def lookForMutualSpeakers(tag,eventId,db):
-    query = "SELECT attendee.* , speaker.* FROM attendee INNER JOIN speaker ON attendee.id = speaker.speaker_id WHERE attendee.attendee_tags LIKE '%{0}%' AND event_id = '{1}'".format(tag,str(eventId))
+def lookForMutualSpeakers(eventId,db):
+    # query = "SELECT attendee.* , speaker.* FROM attendee INNER JOIN speaker ON attendee.id = speaker.speaker_id WHERE attendee.attendee_tags LIKE '%{0}%' AND event_id = '{1}'".format(tag,str(eventId))
+    query = "SELECT attendee.* , speaker.* FROM attendee INNER JOIN speaker ON attendee.id = speaker.speaker_id WHERE attendee.event_id = '{0}'".format(str(eventId))
     cursor = db.cursor()
     cursor.execute(query)
     result1 = cursor.fetchall()
+    print(result1)
     items = [dict(zip((key[0] for key in cursor.description),row))for row in result1]  
     result = []
     for x in items:

@@ -39,10 +39,10 @@ def refreshConnection():
         
         global mysql_connection
         # mysql_connection.close() 
-        sleep(10)   
-        sleep(7200)    
-        sleep(7200)    
-        sleep(7200)    
+        sleep(1800)   
+        # sleep(7200)    
+        # sleep(7200)    
+        # sleep(7200)    
         mysql_connection.ping(reconnect=True)
         
         # mysql_connection.begin()
