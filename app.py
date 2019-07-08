@@ -5,6 +5,7 @@ import pymysql as mysql
 from threading import Thread
 from time import sleep 
 import datetime
+from DataBase import *
 #----------------------------------------#
 from Registration.registration import *
 from EventDetails.EventDetails import *
@@ -22,6 +23,7 @@ from UserTags.AddTags import *
 from UserTags.SearchSimilar import *
 from Registration.UpDateUserProfile import *
 from Registration.UploadPicAndTags import *
+from LogingIn.DeleteUsers import *
 from profilePic.GetProfilePic import *
 from AttendeeDetails.EditDetails import *
 from FollowRequest.FollowRequest import *
@@ -31,29 +33,26 @@ app = Flask(__name__)
 
 api = Api(app,prefix='/v0')
 
-mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
-mysql_connection.connect_timeout = 1
-#mysql_connection.begin()
-def refreshConnection():
-    while True:
-        
-        global mysql_connection
-        # mysql_connection.close() 
-        sleep(1800)   
-        # sleep(7200)    
-        # sleep(7200)    
-        # sleep(7200)    
-        mysql_connection.ping(reconnect=True)
-        
-        # mysql_connection.begin()
-        # mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
-        
-        print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" - - New Connection to mysql extablished") 
-        
-        
-        
+# mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
+# mysql_connection.autocommit(True)
+connection = DataBase()
+mysql_connection = connection.cursor()
 
-Thread(target=refreshConnection).start()
+#mysql_connection.begin()
+# def refreshConnection():
+#     while True:
+        
+#         global mysql_connection
+#         # mysql_connection.close() 
+#         sleep(10)   
+#         #print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" - - New Connection to mysql extablished") 
+#         mysql_connection = None
+#         #mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
+        
+#         print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" - - New Connection to mysql extablished") 
+        
+        
+# Thread(target=refreshConnection).start()
 
 #mysql_connection = mysql.connect(host='',user='test2', password='Test@123', database="dbtest")  
 
@@ -109,6 +108,8 @@ api.add_resource(EditAttendeeInfo, '/update/attendee/details',resource_class_kwa
 api.add_resource(FollowRequest, '/send/request/now/event-<string:id>',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'data':mysql_connection})    
+
+api.add_resource(DeleteUsers,'/delete/users',resource_class_kwargs={'data':mysql_connection})  
 
 if __name__ == '__main__':
     app.run(host="192.168.70.15",debug=True)     
