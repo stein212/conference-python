@@ -9,7 +9,7 @@ class DataBase():
 
     def reconnect(self):
         while True:
-            sleep(5)
+            sleep(60)
             # print("New Connection")
             self.mysql_db.close()
             self.mysql_db.ping(reconnect=True)
