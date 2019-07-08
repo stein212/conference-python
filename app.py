@@ -32,16 +32,25 @@ app = Flask(__name__)
 api = Api(app,prefix='/v0')
 
 mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
-
+mysql_connection.connect_timeout = 1
 #mysql_connection.begin()
 def refreshConnection():
     while True:
-        sleep(7200)
+        
         global mysql_connection
-        # mysql_connection.close()
+        # mysql_connection.close() 
+        sleep(10)   
+        sleep(7200)    
+        sleep(7200)    
+        sleep(7200)    
+        mysql_connection.ping(reconnect=True)
+        
         # mysql_connection.begin()
-        mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
+        # mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
+        
         print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" - - New Connection to mysql extablished") 
+        
+        
         
 
 Thread(target=refreshConnection).start()
@@ -99,11 +108,10 @@ api.add_resource(EditAttendeeInfo, '/update/attendee/details',resource_class_kwa
 
 api.add_resource(FollowRequest, '/send/request/now/event-<string:id>',resource_class_kwargs={'data':mysql_connection})
 
-api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'data':mysql_connection}) 
-
+api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'data':mysql_connection})    
 
 if __name__ == '__main__':
-    app.run(host="192.168.70.15",debug=True)   
+    app.run(host="192.168.70.15",debug=True)     
 
 
 

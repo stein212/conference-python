@@ -38,7 +38,7 @@ class SimilarAttendees(Resource):
         for tag in tags:
             result = lookForAttendees(tag,eventId,self.data)
             attendees.append(result)
-        return attendeeListGenerator(filterAttendees(attendees,id))  
+        return attendeeListGenerator(filterAttendees(attendees,id))     
         #print(request.headers.get("tags")) 
 
 class SimilarSpeakers(Resource):
