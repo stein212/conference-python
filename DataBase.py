@@ -12,7 +12,7 @@ class DataBase():
             sleep(60)
             # print("New Connection")
             self.mysql_db.close()
-            self.mysql_db.ping(reconnect=True)
+            self.mysql_db.ping(reconnect=True) 
             # self.mysql_db = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
 
     def cursor(self):

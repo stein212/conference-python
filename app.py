@@ -111,6 +111,8 @@ api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'da
 
 api.add_resource(DeleteUsers,'/delete/users',resource_class_kwargs={'data':mysql_connection})  
 
+api.add_resource(OtpIdentifier,'/all/otp')  
+
 if __name__ == '__main__':
     app.run(host="192.168.70.15",debug=True)     
 

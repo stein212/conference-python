@@ -142,6 +142,10 @@ class RegisterUser:
         data = c.fetchall()
         return data 
 
+class OtpIdentifier(Resource):
+    def get(self):
+        return temp_request
+
 
 
 
