@@ -72,24 +72,29 @@ class SimilarPeople(Resource):
         #mysql_connection = self.data
 
     @auth.login_required
-    def get(self,attendeeId):
+    def post(self):
         
-        eventId = request.args.get("eventId")
+        # eventId = request.args.get("eventId")
         # tags = getData(attendeeId,self.data) 
         # print(">>>>>>>>>>")
         # print(tags)
         tags = ["flutter","python"] 
+        parse = request.get_json(force=True)
 
+        eventId = parse["eventId"]
+        attendeeId = parse["id"] 
+        tags = getData(attendeeId,self.data) 
+        return tags
         #tags = json.loads(data) 
          
-        if tags == None:
-            tags = []
-        attendees = []
-        for tag in tags:
-            result = lookForAttendees(tag,eventId,self.data)
-            attendees.append(result)
+        # if tags == None:
+        #     tags = []
+        # attendees = []
+        # for tag in tags:
+        #     result = lookForAttendees(tag,eventId,self.data)
+        #     attendees.append(result)
 
-        return attendeeListGenerator(filterAttendees(attendees,id))     
+        # return attendeeListGenerator(filterAttendees(attendees,id))     
         #print(request.headers.get("tags")) 
 
 # class SimilarAttendeesShortDetails(Resource):
