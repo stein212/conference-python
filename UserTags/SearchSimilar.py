@@ -27,19 +27,23 @@ class SimilarAttendees(Resource):
         #mysql_connection = self.data
 
     @auth.login_required
-    def get(self,id):
+    def get(self,attendeeId):
         data = request.args.get("tags")
         eventId = request.args.get("eventId")
-        print("........")
-        print(data)
-        tags = getData(id,self.data)
-        # tags = json.loads(data)
+        # tags = getData(attendeeId,self.data) 
+        # print(">>>>>>>>>>")
+        # print(tags)
+        # tags = ["flutter","python"]
+
+        tags = json.loads(data) 
+
         if tags == None:
             tags = []
         attendees = []
         for tag in tags:
             result = lookForAttendees(tag,eventId,self.data)
             attendees.append(result)
+
         return attendeeListGenerator(filterAttendees(attendees,id))     
         #print(request.headers.get("tags")) 
 
@@ -58,8 +62,34 @@ class SimilarSpeakers(Resource):
         # 
         # for tag in tags:
         result = lookForMutualSpeakers(eventId,self.data)
-        attendees.append(result)
+        attendees.append(result)  
         return attendeeListGenerator(filterAttendees(attendees,id))  
+        #print(request.headers.get("tags")) 
+
+class SimilarPeople(Resource):
+    def __init__(self, **kwargs):
+        self.data = kwargs['data']
+        #mysql_connection = self.data
+
+    @auth.login_required
+    def get(self,attendeeId):
+        
+        eventId = request.args.get("eventId")
+        # tags = getData(attendeeId,self.data) 
+        # print(">>>>>>>>>>")
+        # print(tags)
+        tags = ["flutter","python"]
+
+        #tags = json.loads(data) 
+         
+        if tags == None:
+            tags = []
+        attendees = []
+        for tag in tags:
+            result = lookForAttendees(tag,eventId,self.data)
+            attendees.append(result)
+
+        return attendeeListGenerator(filterAttendees(attendees,id))     
         #print(request.headers.get("tags")) 
 
 # class SimilarAttendeesShortDetails(Resource):
@@ -149,14 +179,18 @@ def getData(attendeeId,DB):
     cursor.execute(query)
     results = cursor.fetchall()
     item = [dict(zip([key[0] for key in cursor.description],row))for row in results] 
-
+    print(item)
     if(len(item) > 0):
         tagData = item[0]["attendee_tags"]
+        print(">>>>>>>> Tag data")
+        print(tagData)
         if tagData == None:
             jsonData = []
+            item[0]["attendee_tags"] = jsonData
         else:
             jsonData = json.loads(tagData) 
-        item[0]["attendee_tags"] = jsonData
+            item[0]["attendee_tags"] = jsonData
+        
         return item[0]["attendee_tags"]
 
     else:

@@ -91,7 +91,9 @@ api.add_resource(UserTags, '/get/<int:id>/taglist',resource_class_kwargs={'data'
 
 api.add_resource(SearchForAttendees, '/get/<string:tag>/tagmembers',resource_class_kwargs={'data':mysql_connection})
 
-api.add_resource(SimilarAttendees, '/get/similar/<int:id>/attendees',resource_class_kwargs={'data':mysql_connection}) 
+api.add_resource(SimilarAttendees, '/get/similar/<int:attendeeId>/attendees',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(SimilarPeople, '/get/similar/<int:attendeeId>/people',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource(SimilarSpeakers, '/get/similar/<int:id>/speakers',resource_class_kwargs={'data':mysql_connection}) 
 
