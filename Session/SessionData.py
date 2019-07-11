@@ -96,7 +96,7 @@ class DataResponse:
                 setData["session_id"] = x["session_id"]
                 setData["session_topic"] = x["session_topic"]
                 setData["session_desc"] = x["session_desc"]
-                setData["start_time"] = x["start_time"].strftime('%Y-%m-%d %H:%M:%S')
+                setData["start_time"] = x["start_time"].strftime('%Y-%m-%d %H:%M:%S') 
                 setData["end_time"] = x["end_time"].strftime('%Y-%m-%d %H:%M:%S') 
                 setData["session_type"] = x["session_type"]
                 setData["location"] = x["location"]                                 

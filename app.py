@@ -21,11 +21,13 @@ from FCM.FcmSender import *
 from UserTags.UserTags import *
 from UserTags.AddTags import *
 from UserTags.SearchSimilar import *
+from UserTags.AllAttendees import *
 from Registration.UpDateUserProfile import *
 from Registration.UploadPicAndTags import *
 from LogingIn.DeleteUsers import *
 from profilePic.GetProfilePic import *
 from AttendeeDetails.EditDetails import *
+from AttendeeDetails.FilterAttendeeDetails import *
 from FollowRequest.FollowRequest import *
 from FollowRequest.CheckRequest import *
 
@@ -107,7 +109,13 @@ api.add_resource(EditAttendeeInfo, '/update/attendee/details',resource_class_kwa
 
 api.add_resource(FollowRequest, '/send/request/now/event-<string:id>',resource_class_kwargs={'data':mysql_connection})
 
-api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'data':mysql_connection})    
+api.add_resource(CheckRequest,'/check/follow/request',resource_class_kwargs={'data':mysql_connection})  
+
+api.add_resource(AllAttendees,'/get/all/attendees/<int:id>/event',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(AllSpeakers,'/get/all/speakers/<int:id>/event',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(FilteredAttendeeDetails,'/attendee/details/<int:id>/short',resource_class_kwargs={'data':mysql_connection}) 
 
 api.add_resource(DeleteUsers,'/delete/users',resource_class_kwargs={'data':mysql_connection})  
 

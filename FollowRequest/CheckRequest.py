@@ -12,7 +12,7 @@ class CheckRequest(Resource):
         
 
 def checkRequest(parse,db):
-    query = "SELECT * FROM connection_request WHERE request_from_attendee = {0} AND (request_to_attendee = {1} AND status = 0)".format(parse["from"],parse["to"])
+    query = "SELECT * FROM connection_request WHERE request_from_attendee = {0} AND (request_to_attendee = {1})".format(parse["from"],parse["to"])
     print(query)
     cursor = db.cursor()
     cursor.execute(query)

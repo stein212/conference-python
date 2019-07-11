@@ -31,7 +31,9 @@ class SimilarAttendees(Resource):
         data = request.args.get("tags")
         eventId = request.args.get("eventId")
         print("........")
-        tags = json.loads(data)
+        print(data)
+        tags = getData(id,self.data)
+        # tags = json.loads(data)
         if tags == None:
             tags = []
         attendees = []
@@ -60,6 +62,26 @@ class SimilarSpeakers(Resource):
         return attendeeListGenerator(filterAttendees(attendees,id))  
         #print(request.headers.get("tags")) 
 
+# class SimilarAttendeesShortDetails(Resource):
+#     def __init__(self, **kwargs):
+#         self.data = kwargs['data']
+#         #mysql_connection = self.data
+
+#     @auth.login_required
+#     def get(self,id):
+#         data = request.args.get("tags")
+#         eventId = request.args.get("eventId")
+#         print("........")
+#         print(data)
+        
+#         tags = json.loads(data)
+#         if tags == None:
+#             tags = []
+#         attendees = []
+#         for tag in tags:
+#             result = lookForAttendees(tag,eventId,self.data)
+#             attendees.append(result)
+#         return attendeeListGenerator(filterAttendees(attendees,id)) 
 
 def lookForAttendees(tag,eventId,db):
     print(tag)
@@ -120,4 +142,23 @@ def lookForMutualSpeakers(eventId,db):
         data = {"speaker_id":x["speaker_id"],"role":x["role"],"id":x["id_number"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"profile_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}
         result.append(data)   
     return result 
+
+def getData(attendeeId,DB):
+    query = "SELECT * FROM attendee WHERE id = {0}".format(str(attendeeId))  
+    cursor = DB.cursor()
+    cursor.execute(query)
+    results = cursor.fetchall()
+    item = [dict(zip([key[0] for key in cursor.description],row))for row in results] 
+
+    if(len(item) > 0):
+        tagData = item[0]["attendee_tags"]
+        if tagData == None:
+            jsonData = []
+        else:
+            jsonData = json.loads(tagData) 
+        item[0]["attendee_tags"] = jsonData
+        return item[0]["attendee_tags"]
+
+    else:
+        return []
 
