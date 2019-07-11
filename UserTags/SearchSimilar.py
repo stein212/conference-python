@@ -78,7 +78,7 @@ class SimilarPeople(Resource):
         # tags = getData(attendeeId,self.data) 
         # print(">>>>>>>>>>")
         # print(tags)
-        tags = ["flutter","python"]
+        tags = ["flutter","python"] 
 
         #tags = json.loads(data) 
          
