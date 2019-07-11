@@ -1,2 +1,6 @@
 #baseDirectory = "/opt/isls/isls/"
 baseDirectory = "/users/apple/python/isls"
+ipAddress = "192.168.70.15"
+dbName = "dbTest1"
+userName = "test1"
+password = "Test@123"

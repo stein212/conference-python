@@ -30,6 +30,7 @@ from AttendeeDetails.EditDetails import *
 from AttendeeDetails.FilterAttendeeDetails import *
 from FollowRequest.FollowRequest import *
 from FollowRequest.CheckRequest import *
+from CommonVariables.commonvariables import *
 
 app = Flask(__name__)
 
@@ -124,7 +125,7 @@ api.add_resource(DeleteUsers,'/delete/users',resource_class_kwargs={'data':mysql
 api.add_resource(OtpIdentifier,'/all/otp')  
 
 if __name__ == '__main__':
-    app.run(host="192.168.70.15",debug=True)     
+    app.run(host=ipAddress,debug=True)     
 
 
 
