@@ -36,7 +36,6 @@ class SearchForAttendees(Resource):
     def get(self,tag):
         #parser = request.get_json(force = True)
         data = getTagMembers(tag)  
-         
         #index = 0
         responseData = []
         if len(data) == 0:
@@ -54,7 +53,7 @@ class SearchForAttendees(Resource):
 
 
 def getTagMembers(tag):
-    query = "SELECT * FROM dbtest1.attendee WHERE attendee_tags LIKE '%{0}%';".format(tag)
+    query = "SELECT * FROM attendee WHERE attendee_tags LIKE '%{0}%';".format(tag)
     mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
     cursor = mysql_connection.cursor()
     cursor.execute(query)

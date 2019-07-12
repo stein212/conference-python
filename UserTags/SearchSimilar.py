@@ -74,30 +74,28 @@ class SimilarPeople(Resource):
         #mysql_connection = self.data
 
     @auth.login_required
-    def post(self):
+    def get(self,attendeeId):
         
-        # eventId = request.args.get("eventId")
-        # tags = getData(attendeeId,self.data) 
+        eventId = request.args.get("eventId")
+        tags = getData(attendeeId,self.data) 
         # print(">>>>>>>>>>")
         # print(tags)
-        tags = ["flutter","python"] 
-        parse = request.get_json(force=True)
+        # tags = ["flutter","python"] 
+        # parse = request.get_json(force=True)
 
-        eventId = parse["eventId"]
-        id = parse["id"] 
-        tags = getData(id,self.data) 
+        # eventId = parse["eventId"]
+        # id = parse["id"] 
+        tags = getData(attendeeId,self.data) 
         print(tags)
-        return tags
+        
         #tags = json.loads(data) 
-         
-        # if tags == None:
-        #     tags = []
-        # attendees = []
-        # for tag in tags:
-        #     result = lookForAttendees(tag,eventId,self.data)
-        #     attendees.append(result)
+        attendees = []
+        for tag in tags:
+            result = lookForAttendees(tag,eventId,self.data)
+            attendees.append(result)
+        #return tags
 
-        # return attendeeListGenerator(filterAttendees(attendees,id))     
+        return attendeeListGenerator(filterAttendees(attendees,id))      
         #print(request.headers.get("tags")) 
 
 # class SimilarAttendeesShortDetails(Resource):
@@ -123,7 +121,7 @@ class SimilarPeople(Resource):
 
 def lookForAttendees(tag,eventId,db):
     print(tag)
-    query = "SELECT * FROM dbtest1.attendee WHERE attendee_tags LIKE '%{0}%' AND event_id = '{1}';".format(tag,str(eventId))  
+    query = "SELECT * FROM attendee WHERE attendee_tags LIKE '%{0}%' AND event_id = '{1}';".format(tag,str(eventId))  
     cursor = db.cursor()
     cursor.execute(query)
     result1 = cursor.fetchall()
