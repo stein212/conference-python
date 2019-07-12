@@ -87,17 +87,17 @@ class SimilarPeople(Resource):
         id = parse["id"] 
         tags = getData(id,self.data) 
         print(tags)
-        # return parse
+        return tags
         #tags = json.loads(data) 
          
-        if tags == None:
-            tags = []
-        attendees = []
-        for tag in tags:
-            result = lookForAttendees(tag,eventId,self.data)
-            attendees.append(result)
+        # if tags == None:
+        #     tags = []
+        # attendees = []
+        # for tag in tags:
+        #     result = lookForAttendees(tag,eventId,self.data)
+        #     attendees.append(result)
 
-        return attendeeListGenerator(filterAttendees(attendees,id))     
+        # return attendeeListGenerator(filterAttendees(attendees,id))     
         #print(request.headers.get("tags")) 
 
 # class SimilarAttendeesShortDetails(Resource):
