@@ -30,6 +30,8 @@ class SimilarAttendees(Resource):
     def get(self,attendeeId):
         data = request.args.get("tags")
         eventId = request.args.get("eventId")
+        # tags = request.get_json("tags")
+        # eventId = request.get_json("eventId")
         # tags = getData(attendeeId,self.data) 
         # print(">>>>>>>>>>")
         # print(tags)
@@ -82,9 +84,10 @@ class SimilarPeople(Resource):
         parse = request.get_json(force=True)
 
         eventId = parse["eventId"]
-        attendeeId = parse["id"] 
-        tags = getData(attendeeId,self.data) 
-        return tags
+        id = parse["id"] 
+        tags = getData(id,self.data) 
+        print(tags)
+        return parse
         #tags = json.loads(data) 
          
         # if tags == None:
