@@ -10,15 +10,12 @@ class EventDetails(Resource):
     def __init__(self, **kwargs):
         self.data = kwargs['data']
         
-        
-        
     def get(self):
         # parser = request.get_json(force=True)
         # eventId = parser["eventId"]
-        data = getDetails(self.data)
+        data = getDetails(self.data) 
         if(len(data) != 0):
             x = data[0]
-            
             # vv = json.loads(x[4]) 
             # if 122 in vv:
             #     y = "Game of thrones"

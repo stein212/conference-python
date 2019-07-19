@@ -31,6 +31,11 @@ from AttendeeDetails.FilterAttendeeDetails import *
 from FollowRequest.FollowRequest import *
 from FollowRequest.CheckRequest import *
 from CommonVariables.commonvariables import *
+#from Questions.AskQuestions import *
+from Maps.GetMapData import *
+from Maps.GetMapImage import *
+from Test1.Testing import *
+
 
 app = Flask(__name__)
 
@@ -122,7 +127,15 @@ api.add_resource(FilteredAttendeeDetails,'/attendee/details/<int:id>/short',reso
 
 api.add_resource(DeleteUsers,'/delete/users',resource_class_kwargs={'data':mysql_connection})  
 
-api.add_resource(OtpIdentifier,'/all/otp')  
+api.add_resource(OtpIdentifier,'/all/otp') 
+
+api.add_resource(DetailsOfMap,'/event/<int:eventId>/map/details',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(GetMapImages,'/event/map/images/<string:imageName>',resource_class_kwargs={'data':mysql_connection})
+
+
+
+
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True)     

@@ -46,7 +46,6 @@ class UploadPicTags(Resource):
                 return {"Error_msg":"Image cannot be uploaded { 2 }."},400
         else:
             file = request.files["file"]
-            
             # if file.filename == " ":
             #     jso = json.loads(tags) 
             #     return setTag(id,jso,self.data) 
@@ -54,7 +53,6 @@ class UploadPicTags(Resource):
                 if file and allowedExtension(file.filename):
                     fileName = str(id)+"_"+secure_filename(file.filename) 
                     file.save(os.path.join(UPLOAD_FOLDER,fileName))
-                    
                     data = setTagAndImageName(id,fileName,self.data) 
                     print(data) 
                     return data,200

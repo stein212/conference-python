@@ -52,7 +52,6 @@ def getSessionData(eventId,db):
     result = cursor.fetchall() 
     #print(eventId)
     items = [dict(zip([key[0] for key in cursor.description], row)) for row in result] 
-    print(items[0])  
     return items   
 
 
