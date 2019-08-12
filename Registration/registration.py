@@ -16,6 +16,8 @@ temp_request = {}
 class DataStorage:
     def __init__(self):
         print("Running..")
+        st = "fppfpfpfpf"
+        
 
     def checkUserExist(self,email,eventId,db):
         query = "SELECT * FROM attendee WHERE attendee_email = %s AND event_id = %s"
@@ -77,10 +79,10 @@ class SendMail:
         self.email = email
         
     def sendOtp(self,otp):
-        millis = int(round(time.time() * 1000))
+        millis = int(round(time.time() * 1000)) 
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        msg = "Your OTP is {0}".format(str(otp))
+        msg = "Your OTP is {0}".format(str(otp)) 
         s.login("praveenkumar.u@3edge.in","Praveen@1996")
         s.sendmail("praveenkumar@3edge.in",'"'+self.email+'"',''+str(msg)+'') 
 
@@ -135,6 +137,7 @@ class RegisterUser:
         c = db.cursor()
         c.execute(query,val)
         db.commit()
+        
         query = "SELECT * FROM attendee WHERE attendee_email = %s AND attendee_password = %s"
         val = (temp_request[self.email]["email"],temp_request[self.email]["password"]) 
         #c = mysql_connection.cursor()

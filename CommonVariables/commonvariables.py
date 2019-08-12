@@ -1,4 +1,4 @@
-#baseDirectory = "/opt/isls/isls/"
+# baseDirectory = "/opt/isls/isls/"
 # ipAddress = "192.154.228.148"
 # dbName = "dbtest"
 # userName = "test1"

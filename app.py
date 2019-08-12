@@ -6,6 +6,9 @@ from threading import Thread
 from time import sleep 
 import datetime
 from DataBase import *
+from flask_cors import CORS
+
+
 #----------------------------------------#
 from Registration.registration import *
 from EventDetails.EventDetails import *
@@ -35,10 +38,16 @@ from CommonVariables.commonvariables import *
 from Maps.GetMapData import *
 from Maps.GetMapImage import *
 from Test1.Testing import *
+from QueryData.CheckQueryData import *
+
+# ........................................... Admin 
+from Admin.AllEventDetails.AllEventDetails import *
+from Admin.Speaker.SingleSpeakerDetails import *
+
 
 
 app = Flask(__name__)
-
+CORS(app)
 api = Api(app,prefix='/v0')
 
 # mysql_connection = mysql.connect(host='127.0.0.1',user='root', password='password', database="dbtest1")
@@ -71,13 +80,13 @@ api.add_resource(UpDateInfo, '/update/attendee/<int:id>/details',resource_class_
 
 api.add_resource(UploadPicTags, '/update/attendee/<int:id>/profile',resource_class_kwargs={'data':mysql_connection})  
 
-api.add_resource(CheckOtp, '/user/otp',resource_class_kwargs={'data':mysql_connection})
+api.add_resource(CheckOtp, '/user/otp',resource_class_kwargs={'data':mysql_connection}) 
 
-api.add_resource(EventDetails, '/event/details',resource_class_kwargs={'data':mysql_connection})
+api.add_resource(EventDetails, '/event/details',resource_class_kwargs={'data':mysql_connection}) 
 
-api.add_resource(Login, '/user/login',resource_class_kwargs={'data':mysql_connection})
+api.add_resource(Login, '/user/login',resource_class_kwargs={'data':mysql_connection}) 
 
-api.add_resource(SessionData, '/user/get/event<string:eventId>-data',resource_class_kwargs={'data':mysql_connection})
+api.add_resource(SessionData, '/user/get/event<string:eventId>-data',resource_class_kwargs={'data':mysql_connection}) 
 
 api.add_resource(SingleSessionData, '/user/get/event/<string:eventId>/session/<int:sessionId>/data',resource_class_kwargs={'data':mysql_connection})
 
@@ -133,7 +142,11 @@ api.add_resource(DetailsOfMap,'/event/<int:eventId>/map/details',resource_class_
 
 api.add_resource(GetMapImages,'/event/map/images/<string:imageName>',resource_class_kwargs={'data':mysql_connection})
 
+api.add_resource(AllEventDetails , '/all/event/details/page/<int:pageNos>',resource_class_kwargs={'data':mysql_connection})
 
+api.add_resource(Sample, '/query/data',resource_class_kwargs={'data':mysql_connection})  
+
+api.add_resource (SingleSpeakerDetails ,'/get/speaker/<int:speakerId>/data',resource_class_kwargs={'data':mysql_connection})
 
 
 
