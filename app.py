@@ -43,6 +43,8 @@ from QueryData.CheckQueryData import *
 # ........................................... Admin 
 from Admin.AllEventDetails.AllEventDetails import *
 from Admin.Speaker.SingleSpeakerDetails import *
+from Admin.Speaker.AddNewSpeaker import *
+from Admin.Map.MapDetails import *
 
 
 
@@ -148,7 +150,9 @@ api.add_resource(Sample, '/query/data',resource_class_kwargs={'data':mysql_conne
 
 api.add_resource (SingleSpeakerDetails ,'/get/speaker/<int:speakerId>/data',resource_class_kwargs={'data':mysql_connection})
 
+api.add_resource (AddNewSpeaker,'/add/new/speaker',resource_class_kwargs={'data':mysql_connection})
 
+api.add_resource (MapDetails,'/add/new/map',resource_class_kwargs={'data':mysql_connection})
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True)     

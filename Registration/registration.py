@@ -45,6 +45,7 @@ class UserRegistration(Resource):
     def post(self):
         parser = request.get_json(force=True)
         millis = int(round(time.time() * 1000))
+        
         otp = random.randint(1000,9999)
         print(parser)
         email = parser['email']

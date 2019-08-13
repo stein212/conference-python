@@ -17,7 +17,7 @@ class QueryData:
         cursor.close()
         return listOfKeyValData
 
-    def insertQueryMethod(self,query,val):
+    def insertAndUpdateQueryMethod(self,query,val):
         try:
             self.query = query
             cursor = self.db.cursor()
@@ -26,6 +26,17 @@ class QueryData:
             return { "Inserted Row": cursor.rowcount }
         except:
             return { "Inserted Row":0 }
+    
+    def insertOrUpdateMany(self,query,values):
+        try:
+            # self.query = query
+            cursor = self.db.cursor()
+            cursor.executemany(query,val)
+            self.db.commit()
+            return { "Inserted Row": cursor.rowcount }
+        except:
+            return { "Inserted Row":0 }
+
 
 
 

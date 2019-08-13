@@ -55,7 +55,7 @@ class UploadPicTags(Resource):
                     file.save(os.path.join(UPLOAD_FOLDER,fileName))
                     data = setTagAndImageName(id,fileName,self.data) 
                     print(data) 
-                    return data,200
+                    return data,200 
                     
                 else:
                     # jso = json.loads(tags) 
