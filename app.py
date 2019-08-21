@@ -45,6 +45,10 @@ from Admin.AllEventDetails.AllEventDetails import *
 from Admin.Speaker.SingleSpeakerDetails import *
 from Admin.Speaker.AddNewSpeaker import *
 from Admin.Map.MapDetails import *
+from Admin.AddAttendees.AddAttendees import *
+from Admin.Polls.SetPolls import *
+from Admin.Polls.ListOfPolls import *
+from Admin.Polls.PollAnswer import *
 
 
 
@@ -153,6 +157,14 @@ api.add_resource (SingleSpeakerDetails ,'/get/speaker/<int:speakerId>/data',reso
 api.add_resource (AddNewSpeaker,'/add/new/speaker',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource (MapDetails,'/add/new/map',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource (AddAttendees,'/add/<string:eventId>',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource (SetPolls,'/add/polls',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource (ListOfPolls,'/list/polls/by/<int:pageNos>',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource (PollAnswer,'/pol/answer',resource_class_kwargs={'data':mysql_connection}) 
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True)     

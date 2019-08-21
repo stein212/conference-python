@@ -14,7 +14,7 @@ class MapDetails(Resource):
 
     def post(self):
         if 'files' not in request.files:
-            return {"msg":"Need Image File"},202
+            return {"msg":"Need Image File"},202 
 
         else:
             file = request.files['files']         
@@ -42,6 +42,7 @@ class MapDetails(Resource):
                         return {"msg":"Not inserted map data"},203
                 else:
                     return {},202
+                "fdshbfsd".isemai
             
 
 def generateListOfMapData(data,mapId):
