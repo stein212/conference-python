@@ -30,7 +30,7 @@ class EventDetails(Resource):
             return {"Error_msg":"Event is not found"}    
         
 def getDetails(DB):
-    query = "SELECT * FROM event_details WHERE current_status = 1"
+    query = "SELECT * FROM event_details WHERE current_status = 2"
     c = DB.cursor()  
     c.execute(query)
     data  = c.fetchall()

@@ -42,6 +42,8 @@ from QueryData.CheckQueryData import *
 
 # ........................................... Admin 
 from Admin.AllEventDetails.AllEventDetails import *
+from Admin.AllEventDetails.PresentAndFutureEvent import *
+from Admin.AllEventDetails.AddNewEvent import *
 from Admin.Speaker.SingleSpeakerDetails import *
 from Admin.Speaker.AddNewSpeaker import *
 from Admin.Map.MapDetails import *
@@ -148,7 +150,11 @@ api.add_resource(DetailsOfMap,'/event/<int:eventId>/map/details',resource_class_
 
 api.add_resource(GetMapImages,'/event/map/images/<string:imageName>',resource_class_kwargs={'data':mysql_connection})
 
+# .............................. Admin ..............................
+
 api.add_resource(AllEventDetails , '/all/event/details/page/<int:pageNos>',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource (PresentFutureDetailsOfEvent,'/event/details/presentandfuture',resource_class_kwargs={'data':mysql_connection}) 
 
 api.add_resource(Sample, '/query/data',resource_class_kwargs={'data':mysql_connection})  
 
@@ -167,7 +173,7 @@ api.add_resource (ListOfPolls,'/list/polls/by/<int:pageNos>',resource_class_kwar
 api.add_resource (PollAnswer,'/pol/answer',resource_class_kwargs={'data':mysql_connection}) 
 
 if __name__ == '__main__':
-    app.run(host=ipAddress,debug=True)     
+    app.run(host=ipAddress,debug=True,threaded=True)     
 
 
 
