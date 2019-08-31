@@ -10,6 +10,7 @@ class GetMapImages(Resource):
 
     def get(self,imageName):
         imageName = secure_filename(imageName)
+        
         print(imageName)
         try:
             return send_file(baseDirectory+"/Maps/mapimages/"+str(imageName)) 

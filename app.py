@@ -156,6 +156,9 @@ api.add_resource(AllEventDetails , '/all/event/details/page/<int:pageNos>',resou
 
 api.add_resource (PresentFutureDetailsOfEvent,'/event/details/presentandfuture',resource_class_kwargs={'data':mysql_connection}) 
 
+api.add_resource (NewEventdetails,'/add/new/event',resource_class_kwargs={'data':mysql_connection}) 
+
+
 api.add_resource(Sample, '/query/data',resource_class_kwargs={'data':mysql_connection})  
 
 api.add_resource (SingleSpeakerDetails ,'/get/speaker/<int:speakerId>/data',resource_class_kwargs={'data':mysql_connection})
