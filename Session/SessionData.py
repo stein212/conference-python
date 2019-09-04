@@ -70,6 +70,7 @@ class DataResponse:
         # print(response)    
         
         for x in self.data:
+            
             key = x['start_time'].strftime('%Y-%m-%d')
             concept = []
             if x["concepts"] == None:
@@ -100,6 +101,8 @@ class DataResponse:
                 setData["session_type"] = x["session_type"]
                 setData["location"] = x["location"]                                 
                 setData["event_id"] = x["event_id"]
+                setData["session_image"]=x["session_image"] 
+                print(setData)
                 setData["speakers"] = [{"speaker_id":x["speaker_id"],"role":x["role"],"id":x["id_number"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"speaker_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}]
                 response[key][x['start_time'].strftime('%Y-%m-%d %H:%M:%S')+ '.'+ str(x["session_id"])] = setData
         return response

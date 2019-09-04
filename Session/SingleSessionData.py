@@ -74,6 +74,7 @@ def dataPhraser(item):
             setData["location"] = x["location"]                                 
             setData["event_id"] = x["event_id"]
             setData["concept"] = concept
+            setData["session_image"]=x["session_image"]
             setData["speakers"] = [{"speaker_id":x["speaker_id"],"role":x["role"],"id":x["id_number"],"about":x["attendee_synopsis"],"attendee_name":x["attendee_name"],"speaker_image":x["prof_img"],"linked_in":x["attendee_linkedin_profile"],"facebook":x["attendee_facebook"],"twitter":x["attendee_twitter"],"tags":tags,"interest":x["attendee_areas_of_interest"],"links":links,"website":x["attendee_research_websites"]}]        
     return setData      
 

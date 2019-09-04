@@ -12,7 +12,7 @@ class NewEventdetails(Resource):
         #item="event_name","event_desc","venue_name","venue_address","event_start_date","event_end_date","registration_fee","concepts"
         query="INSERT INTO event_details(event_name,event_desc,venue_name,venue_address,event_start_date,event_end_date,registration_fee,concepts,current_status) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         
-        val=(str(userData["event_name"]),str(userData["event_desc"]),str(userData["venue_name"]),str(userData["venue_address"]),str(userData["event_start_date"]),str(userData["event_end_date"]),str(userData["registration_fee"]),str(userData["concepts"]),str(userData["current_status"]))
+        val=(str(userData["event_name"]),str(userData["event_description"]),str(userData["venue_name"]),str(userData["venue_address"]),str(userData["event_start_date"]),str(userData["event_end_date"]),str(0),str(userData["concepts"]),str(userData["current_status"]))
         '''cursor=self.db.cursor()
         cursor.execute(query,val)
         self.db.commit()'''

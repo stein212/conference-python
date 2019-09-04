@@ -25,12 +25,12 @@ class EventDetails(Resource):
             #     c = mysql_connection.cursor()  
             #     c.execute(query)
             #     mysql_connection.commit()
-            return {"event_id":x[0],"event_name":x[1],"event_desc":x[2],"venue_name":x[3],"venue_address":x[4],"event_start_date":x[5].strftime('%Y-%m-%d %H:%M:%S'),"event_end_date":x[6].strftime('%Y-%m-%d %H:%M:%S'),"registration_start_date":x[7].strftime('%Y-%m-%d %H:%M:%S'),"registration_end_date":x[8].strftime('%Y-%m-%d %H:%M:%S'),"registration_fee":int(x[9]),"venue_map1":x[10],"venue_map2":x[11],"current_status":x[12],"concept":json.loads(x[13])}
+            return {"event_id":x[0],"event_name":x[1],"event_desc":x[2],"venue_name":x[3],"venue_address":x[4],"event_start_date":x[5].strftime('%Y-%m-%d %H:%M:%S'),"event_end_date":x[6].strftime('%Y-%m-%d %H:%M:%S'),"registration_start_date":x[7].strftime('%Y-%m-%d %H:%M:%S'),"registration_end_date":x[8].strftime('%Y-%m-%d %H:%M:%S'),"registration_fee":int(x[9]),"venue_map1":x[10],"venue_map2":x[11],"current_status":x[12],"concept":json.loads(x[13]),"event_image":x[14]}
         else:
             return {"Error_msg":"Event is not found"}    
         
 def getDetails(DB):
-    query = "SELECT * FROM event_details WHERE current_status = 2"
+    query = "SELECT * FROM event_details WHERE current_status = 2" 
     c = DB.cursor()  
     c.execute(query)
     data  = c.fetchall()

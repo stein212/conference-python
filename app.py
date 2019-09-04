@@ -51,6 +51,8 @@ from Admin.AddAttendees.AddAttendees import *
 from Admin.Polls.SetPolls import *
 from Admin.Polls.ListOfPolls import *
 from Admin.Polls.PollAnswer import *
+from Admin.session.Getsessiondetails import *
+from Admin.session.ListOfSession import *
 
 
 
@@ -94,7 +96,7 @@ api.add_resource(EventDetails, '/event/details',resource_class_kwargs={'data':my
 
 api.add_resource(Login, '/user/login',resource_class_kwargs={'data':mysql_connection}) 
 
-api.add_resource(SessionData, '/user/get/event<string:eventId>-data',resource_class_kwargs={'data':mysql_connection}) 
+api.add_resource(SessionData, '/user/get/all/session/event<string:eventId>-data',resource_class_kwargs={'data':mysql_connection}) 
 
 api.add_resource(SingleSessionData, '/user/get/event/<string:eventId>/session/<int:sessionId>/data',resource_class_kwargs={'data':mysql_connection})
 
@@ -158,7 +160,6 @@ api.add_resource (PresentFutureDetailsOfEvent,'/event/details/presentandfuture',
 
 api.add_resource (NewEventdetails,'/add/new/event',resource_class_kwargs={'data':mysql_connection}) 
 
-
 api.add_resource(Sample, '/query/data',resource_class_kwargs={'data':mysql_connection})  
 
 api.add_resource (SingleSpeakerDetails ,'/get/speaker/<int:speakerId>/data',resource_class_kwargs={'data':mysql_connection})
@@ -174,6 +175,10 @@ api.add_resource (SetPolls,'/add/polls',resource_class_kwargs={'data':mysql_conn
 api.add_resource (ListOfPolls,'/list/polls/by/<int:pageNos>',resource_class_kwargs={'data':mysql_connection}) 
 
 api.add_resource (PollAnswer,'/pol/answer',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(SessionDetails,'/all/session/for/event/<int:event_id>',resource_class_kwargs={'data':mysql_connection})
+
+
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True,threaded=True)     
