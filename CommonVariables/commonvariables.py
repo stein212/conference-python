@@ -10,5 +10,5 @@
 baseDirectory = "/users/apple/Azure/Test1/"
 userName = "root"
 password = "password"
-ipAddress = "192.168.70.15"
+ipAddress = "192.168.16.3"
 dbName = "dbtest"

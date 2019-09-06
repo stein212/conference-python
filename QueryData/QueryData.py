@@ -35,7 +35,7 @@ class QueryData:
             self.db.commit()
             return { "Inserted Row": cursor.rowcount }
         except:
-            return { "Inserted Row":0 }
+            return { "Inserted Row":0 } 
 
 
 
