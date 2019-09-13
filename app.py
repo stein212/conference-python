@@ -46,13 +46,18 @@ from Admin.AllEventDetails.PresentAndFutureEvent import *
 from Admin.AllEventDetails.AddNewEvent import *
 from Admin.Speaker.SingleSpeakerDetails import *
 from Admin.Speaker.AddNewSpeaker import *
+# from Admin.Speaker.AllSpeakers import *
 from Admin.Map.MapDetails import *
 from Admin.AddAttendees.AddAttendees import *
 from Admin.Polls.SetPolls import *
 from Admin.Polls.ListOfPolls import *
 from Admin.Polls.PollAnswer import *
+from Admin.Polls.GetPollsBySession import *
 from Admin.session.Getsessiondetails import *
 from Admin.session.ListOfSession import *
+from Admin.session.GetSessionFromEventId import *
+from Admin.Polls.AddNewPolls import *
+from Admin.Polls.AddpollAnswer import *
 
 
 
@@ -164,6 +169,8 @@ api.add_resource(Sample, '/query/data',resource_class_kwargs={'data':mysql_conne
 
 api.add_resource (SingleSpeakerDetails ,'/get/speaker/<int:speakerId>/data',resource_class_kwargs={'data':mysql_connection})
 
+# api.add_resource(AllSpeakers , '/all/speaker',resource_class_kwargs={'data':mysql_connection})
+
 api.add_resource (AddNewSpeaker,'/add/new/speaker',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource (MapDetails,'/add/new/map',resource_class_kwargs={'data':mysql_connection})
@@ -176,7 +183,15 @@ api.add_resource (ListOfPolls,'/list/polls/by/<int:pageNos>',resource_class_kwar
 
 api.add_resource (PollAnswer,'/pol/answer',resource_class_kwargs={'data':mysql_connection}) 
 
+api.add_resource(GetSessionFromEventId,'/get/all/session/by/event/<int:eventId>',resource_class_kwargs={'data':mysql_connection})
+
 api.add_resource(SessionDetails,'/all/session/for/event/<int:event_id>',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(GetPollsBySession,'/get/poll/<string:session_id>',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(Insertpollquestion,'/insert/poll/question',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(AddPollAnswers,'/add/new/poll',resource_class_kwargs={'data':mysql_connection})
 
 
 

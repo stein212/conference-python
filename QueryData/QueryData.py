@@ -25,13 +25,13 @@ class QueryData:
             self.db.commit()
             return { "Inserted Row": cursor.rowcount }
         except:
-            return { "Inserted Row":0 }
+            return { "Inserted Row": 0 }
     
     def insertOrUpdateMany(self,query,values):
         try:
             # self.query = query
             cursor = self.db.cursor()
-            cursor.executemany(query,val)
+            cursor.executemany(query,values)
             self.db.commit()
             return { "Inserted Row": cursor.rowcount }
         except:
