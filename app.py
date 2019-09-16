@@ -58,6 +58,8 @@ from Admin.session.ListOfSession import *
 from Admin.session.GetSessionFromEventId import *
 from Admin.Polls.AddNewPolls import *
 from Admin.Polls.AddpollAnswer import *
+from Admin.session.GetAttendeeAndUser import *
+from Admin.session.AddSession import *
 
 
 
@@ -193,7 +195,9 @@ api.add_resource(Insertpollquestion,'/insert/poll/question',resource_class_kwarg
 
 api.add_resource(AddPollAnswers,'/add/new/poll',resource_class_kwargs={'data':mysql_connection})
 
+api.add_resource(GetAttendeeDetails,'/get/attendee/users/<string:eventId>',resource_class_kwargs={'data':mysql_connection})
 
+api.add_resource(AddSession,'/add/session',resource_class_kwargs={'data':mysql_connection})
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True,threaded=True)     
