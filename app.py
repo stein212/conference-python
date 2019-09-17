@@ -19,6 +19,7 @@ from Speaker.SpeakerDetails import *
 from Speaker.AllSpeakers import *
 from Speaker.SpeakerImage import *
 from AttendeeDetails.Attendee import *
+from AttendeeDetails.attendance import *
 from UploadFiles.UploadFiles import *
 from FCM.FcmSender import *
 from UserTags.UserTags import *
@@ -110,6 +111,8 @@ api.add_resource(SingleSessionData, '/user/get/event/<string:eventId>/session/<i
 api.add_resource(SpeakerDetails, '/speaker/details-by/id/<int:speakerId>/data',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource(AttendeeDetails, '/attendee/details-by/id/<int:attendeeId>/data',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(Attendance, '/attendee/attendance',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource(UploadProfPic, '/upload',resource_class_kwargs={'data':mysql_connection})
 
