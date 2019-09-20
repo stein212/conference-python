@@ -15,5 +15,5 @@ class GetMapImages(Resource):
         try:
             return send_file(baseDirectory+"/Maps/mapimages/"+str(imageName)) 
         except:
-            return send_file(baseDirectory+"/Maps/mapimages/error_map.jpeg") 
+            return send_file(baseDirectory+"/Maps/mapimages/error_map.jpeg")  
         

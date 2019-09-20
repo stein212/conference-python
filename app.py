@@ -61,6 +61,9 @@ from Admin.Polls.AddNewPolls import *
 from Admin.Polls.AddpollAnswer import *
 from Admin.session.GetAttendeeAndUser import *
 from Admin.session.AddSession import *
+from Admin.session.UploadFilesToSession import *
+from AttendeeDetails.ShareDetails import *
+from Admin.SplashScreen.SplashScreen import *
 
 
 
@@ -201,6 +204,14 @@ api.add_resource(AddPollAnswers,'/add/new/poll',resource_class_kwargs={'data':my
 api.add_resource(GetAttendeeDetails,'/get/attendee/users/<string:eventId>',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource(AddSession,'/add/session',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(UploadFilesToSession,'/add/files/to/session/<string:session_id>',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(ShareDetails,'/share/details',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(SplashScreen,'/get/splash',resource_class_kwargs={'data':mysql_connection})
+
+
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True,threaded=True)     
