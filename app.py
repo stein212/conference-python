@@ -64,6 +64,7 @@ from Admin.session.AddSession import *
 from Admin.session.UploadFilesToSession import *
 from AttendeeDetails.ShareDetails import *
 from Admin.SplashScreen.SplashScreen import *
+from Admin.Polls.AllSession import AllSession
 
 
 
@@ -210,6 +211,8 @@ api.add_resource(UploadFilesToSession,'/add/files/to/session/<string:session_id>
 api.add_resource(ShareDetails,'/share/details',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource(SplashScreen,'/get/splash',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(AllSession,'/get/poll/session/<string:eventId>',resource_class_kwargs={'data':mysql_connection})
 
 
 

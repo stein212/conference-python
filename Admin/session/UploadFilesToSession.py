@@ -30,7 +30,7 @@ class UploadFilesToSession(Resource):
             fileNameCheck = str(session_id)+"-"+secure_filename(file.filename) 
             if len(checkSessionInSessionFiles(self.data,session_id,fileNameCheck)) == 0:
                 if 'file' not in request.files:
-                    return {"Error_msg":"Image cannot be uploaded { 2 }."},400
+                    return {"data":[],"Error_msg":"Please provide a valid file."}
                 else:
                     file = request.files["file"]
                     if file and allowedExtension(file.filename):
@@ -38,10 +38,10 @@ class UploadFilesToSession(Resource):
                         file.save(os.path.join(UPLOAD_FOLDER,fileName))
                         data = InsertIntoSession(session_id,fileName,self.data) 
                         print(data) 
-                        return data,200 
+                        return {"data":[{}]} 
                     
                     else:
-                        return {"Error_msg":"File extension cannot be uploaded."},400
+                        return {"data":[],"Error_msg":"File extension cannot be uploaded."}
             else:
                 return {
                 "data":[],
