@@ -16,7 +16,7 @@ class GetSpeakerPicture(Resource):
         except:
             if id == 1:
                 return send_file(baseDirectory+"/profilePic/profPic/blank.jpg","image/jpeg")     
-            return send_file(baseDirectory+"/profilePic/profPic/person.png","image/jpeg")
+            return send_file(baseDirectory+"/profilePic/profPic/person.png","image/jpeg") 
 
 
 
