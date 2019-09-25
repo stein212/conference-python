@@ -42,7 +42,7 @@ class MapDetails(Resource):
                         return {"msg":"Not inserted map data"},203
                 else:
                     return {},202
-                "fdshbfsd".isemai
+                
             
 
 def generateListOfMapData(data,mapId):

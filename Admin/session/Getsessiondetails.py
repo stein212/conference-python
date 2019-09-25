@@ -38,10 +38,7 @@ def parseData(data):
                     "attendee_email":x["attendee_email"],
                     "attendee_name" :x["attendee_name"],
                     "id": x["id"],
-                    "prof_img" :x["prof_img"]
-                    
-                    
-                    
+                    "prof_img" :x["prof_img"]                  
                 }
                 parsedData["sessionData"].append(temp_val) 
             else:

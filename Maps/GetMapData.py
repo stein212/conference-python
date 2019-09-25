@@ -28,7 +28,7 @@ def dataAssigning(data):
             if x["map_id"] in item:
                 item[x["map_id"]]["data"].append({"map_data_id":x["map_data_id"],"hall_number":x["hall_number"],"description":x["description"],"title":x["title"]})
             else:
-                item[x["map_id"]] = {"map_id": x["map_id"],"event_id": x["event_id"],"map_image": x["map_image"],"map_title":x["map_title"],"data":[{"map_data_id":x["map_data_id"],"hall_number":x["hall_number"],"description":x["description"],"title":x["title"]}]}
+                item[x["map_id"]] = {"map_id": x["map_id"],"event_id": x["event_id"],"map_image": x["map_image"],"map_title":x["map_title"],"date":x["date"].strftime("%Y-%m-%d"),"data":[{"map_data_id":x["map_data_id"],"hall_number":x["hall_number"],"description":x["description"],"title":x["title"]}]}
     return item
 
 def parse(data):
