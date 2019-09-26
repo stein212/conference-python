@@ -68,7 +68,7 @@ from Admin.session.UploadFilesToSession import *
 from AttendeeDetails.ShareDetails import *
 from Admin.SplashScreen.SplashScreen import *
 from Admin.Polls.AllSession import AllSession
-from Admin.Map.GetMapData import *
+from Admin.Map.GetMapData2 import *
 from Admin.Map.UpdateMapImageData import *
 from Admin.Map.UpdateMapData import *
 from Admin.Map.InsertMapData import *
@@ -228,7 +228,7 @@ api.add_resource(SplashScreen,'/get/splash',resource_class_kwargs={'data':mysql_
 
 api.add_resource(AllSession,'/get/poll/session/<string:eventId>',resource_class_kwargs={'data':mysql_connection})
 
-api.add_resource(GetMapDataByDate,'/get/all/map/data',resource_class_kwargs={'data':mysql_connection})
+api.add_resource(GetMapData2,'/get/all/map/data/<string:eventId>',resource_class_kwargs={'data':mysql_connection})
 
 api.add_resource(UpdateMapTitle,'/update/map/details/data',resource_class_kwargs={'data':mysql_connection})
 
@@ -239,7 +239,7 @@ api.add_resource(InsertPointData,'/add/map/data',resource_class_kwargs={'data':m
 api.add_resource(DeleteMapData,'/delete/map/data',resource_class_kwargs={'data':mysql_connection}) 
 
 # ..................... Admin Session ......................ZipFile The class for reading and writing ZIP files.  See section 
-api.add_resource(DeleteMapData,'/session/details/',resource_class_kwargs={'data':mysql_connection}) 
+# api.add_resource(DeleteMapData,'/session/details/',resource_class_kwargs={'data':mysql_connection}) 
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True,threaded=True)     

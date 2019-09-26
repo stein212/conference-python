@@ -58,8 +58,8 @@ class AddSession2(Resource):
                                 }
                         else:
                             return {
-                            "data":[],
-                            "Error_msg":"speaker and user is not inserted"
+                            "data":{"session":0},
+                            "Error_msg":"Error in adding session .Please try again."
                             }
                         
                     else:
@@ -73,8 +73,8 @@ class AddSession2(Resource):
             
         else:
             return {
-                "data":[],
-                "Error_msg":"session is already existed"
+                "data":{"session":0},
+                "Error_msg":"session already exists."
                 }
 
 

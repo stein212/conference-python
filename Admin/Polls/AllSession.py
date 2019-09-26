@@ -44,7 +44,7 @@ def parseData(session,pollCount):
     # return data
     for x in pollCount:
         if x["session_id"] in data:
-            data[x["session_id"]]["count"] = x["COUNT(poll.session_id)"]
+            data[x["session_id"]]["count"] = x["COUNT(poll.session_id)"] 
             print("true")
         
     # return data
