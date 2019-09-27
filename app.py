@@ -73,6 +73,10 @@ from Admin.Map.UpdateMapImageData import *
 from Admin.Map.UpdateMapData import *
 from Admin.Map.InsertMapData import *
 from Admin.Map.DeleteMapData import *
+from Admin.Speaker.DeleteSpeaker import *
+from Admin.session.GetSessionDetail import *
+from Admin.session.UpdateTime import *
+from Admin.session.UpdateSession import *
 
 
 
@@ -240,6 +244,13 @@ api.add_resource(DeleteMapData,'/delete/map/data',resource_class_kwargs={'data':
 
 # ..................... Admin Session ......................ZipFile The class for reading and writing ZIP files.  See section 
 # api.add_resource(DeleteMapData,'/session/details/',resource_class_kwargs={'data':mysql_connection}) 
+api.add_resource(GetSessionDetailsById,'/get/session/<string:sessionid>/data',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(DeleteSpeaker,'/delete/speaker',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(UpdateSessionTime,'/edit/session/time',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(UpdateSessionDetails,'/edit/session/data',resource_class_kwargs={'data':mysql_connection}) 
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True,threaded=True)     
