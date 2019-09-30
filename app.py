@@ -77,6 +77,9 @@ from Admin.Speaker.DeleteSpeaker import *
 from Admin.session.GetSessionDetail import *
 from Admin.session.UpdateTime import *
 from Admin.session.UpdateSession import *
+from Admin.session.AddSpeaker import *
+from Admin.session.AddUsers import *
+from Admin.session.DeleteUser import *
 
 
 
@@ -248,12 +251,20 @@ api.add_resource(GetSessionDetailsById,'/get/session/<string:sessionid>/data',re
 
 api.add_resource(DeleteSpeaker,'/delete/speaker',resource_class_kwargs={'data':mysql_connection}) 
 
+api.add_resource(DeleteUser,'/delete/user',resource_class_kwargs={'data':mysql_connection}) 
+
 api.add_resource(UpdateSessionTime,'/edit/session/time',resource_class_kwargs={'data':mysql_connection}) 
 
 api.add_resource(UpdateSessionDetails,'/edit/session/data',resource_class_kwargs={'data':mysql_connection}) 
 
+api.add_resource(AddSpeakers,'/add/speakers',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(AddUsers , '/add/users',resource_class_kwargs={'data':mysql_connection})
+
+# api.add_resource(DeleteUser,'/delete/user',resource_class_kwargs={'data':mysql_connection}) 
+
 if __name__ == '__main__':
-    app.run(host=ipAddress,debug=True,threaded=True)     
+    app.run(host=ipAddress,debug=True,threaded=True,processes=1)      
 
 
 

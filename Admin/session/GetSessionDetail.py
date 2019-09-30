@@ -14,12 +14,12 @@ class GetSessionDetailsById(Resource):
             speakerData = getSpeakerData(self.db,sessionid)
             response = addSpeakerData(sessionData[0],speakerData)
             userData = getUser(self.db,sessionid)
+            # return userData
             response = addUsers(userData,response) 
             response["start_time"] = response["start_time"].strftime("%Y-%m-%d %H:%M:%S")
             response["end_time"] = response["end_time"].strftime("%Y-%m-%d %H:%M:%S")
             return [response] 
-            
-
+        
         else:
             return {
                 "data":[],
