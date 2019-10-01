@@ -69,7 +69,7 @@ def removePassword(values):
 def removeUnwantedData(values):
     data = []
     for x in values:
-        item = {"id":x["id"],"attendee_name":x["attendee_name"],"profile_image":x["prof_img"],"website":x["attendee_research_websites"],"interest":x["attendee_areas_of_interest"]}
+        item = {"id":x["id"],"attendee_name":x["attendee_name"],"profile_image":x["prof_img"],"website":x["attendee_research_websites"],"interest":x["attendee_areas_of_interest"],"attendee_email":x["attendee_email"]}
         data.append(item)
     return data
 

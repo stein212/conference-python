@@ -84,6 +84,8 @@ from Admin.Users.AllUsers import *
 from Admin.Users.InsertNewUsers import *
 from Admin.Map.GetAllMap import *
 from Admin.AddAttendees.AddAttendeesData import *
+from Admin.AddAttendees.SendInvite import *
+from Admin.Attendees.AllAttendees import *
 
 
 
@@ -275,6 +277,10 @@ api.add_resource(InsertNewUsers,'/add/new/users',resource_class_kwargs={'data':m
 api.add_resource(GetMapDataDetail,'/get/event/<string:eventId>/map/data',resource_class_kwargs={'data':mysql_connection}) 
 
 api.add_resource(AddAttendeeData,'/add/many/attendee/<string:eventId>',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(SendInvite,'/send/invite',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(AllAttendeesDetails,'/all/attendee/event/<string:eventId>',resource_class_kwargs={'data':mysql_connection}) 
 
 
 
