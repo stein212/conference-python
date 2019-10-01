@@ -80,6 +80,10 @@ from Admin.session.UpdateSession import *
 from Admin.session.AddSpeaker import *
 from Admin.session.AddUsers import *
 from Admin.session.DeleteUser import *
+from Admin.Users.AllUsers import *
+from Admin.Users.InsertNewUsers import *
+from Admin.Map.GetAllMap import *
+from Admin.AddAttendees.AddAttendeesData import *
 
 
 
@@ -262,6 +266,17 @@ api.add_resource(AddSpeakers,'/add/speakers',resource_class_kwargs={'data':mysql
 api.add_resource(AddUsers , '/add/users',resource_class_kwargs={'data':mysql_connection})
 
 # api.add_resource(DeleteUser,'/delete/user',resource_class_kwargs={'data':mysql_connection}) 
+
+#.................------- USERS -----------.............#
+api.add_resource(GetAllUserDetails,'/all/users',resource_class_kwargs={'data':mysql_connection})
+
+api.add_resource(InsertNewUsers,'/add/new/users',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(GetMapDataDetail,'/get/event/<string:eventId>/map/data',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(AddAttendeeData,'/add/many/attendee/<string:eventId>',resource_class_kwargs={'data':mysql_connection}) 
+
+
 
 if __name__ == '__main__':
     app.run(host=ipAddress,debug=True,threaded=True,processes=1)      
