@@ -86,6 +86,8 @@ from Admin.Map.GetAllMap import *
 from Admin.AddAttendees.AddAttendeesData import *
 from Admin.AddAttendees.SendInvite import *
 from Admin.Attendees.AllAttendees import *
+from Admin.session.DeleteSessionFiles import *
+from Admin.Polls.ListOfPollDetails import *
 
 
 
@@ -281,6 +283,10 @@ api.add_resource(AddAttendeeData,'/add/many/attendee/<string:eventId>',resource_
 api.add_resource(SendInvite,'/send/invite',resource_class_kwargs={'data':mysql_connection}) 
 
 api.add_resource(AllAttendeesDetails,'/all/attendee/event/<string:eventId>',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(DeleteSessionFiles,'/delete/files',resource_class_kwargs={'data':mysql_connection}) 
+
+api.add_resource(GetListOfPollDetails,'/poll/list/session/<string:sessionId>',resource_class_kwargs={'data':mysql_connection})
 
 
 

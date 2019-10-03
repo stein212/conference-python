@@ -16,6 +16,7 @@ class GetSessionDetailsById(Resource):
             userData = getUser(self.db,sessionid)
             # return userData
             response = addUsers(userData,response) 
+            response = addFilesData(response,getFiles(self.db,sessionid)) 
             response["start_time"] = response["start_time"].strftime("%Y-%m-%d %H:%M:%S")
             response["end_time"] = response["end_time"].strftime("%Y-%m-%d %H:%M:%S")
             return [response] 
@@ -74,3 +75,17 @@ def getUser(db,sessionId):
     queryData=QueryData(db)
     data=queryData.selectQueryMethod(query)
     return data
+
+def getFiles(db,sessionId):
+    query = "SELECT * FROM session_files WHERE session_id = {0}".format(sessionId)
+    queryData = QueryData(db)
+    data = queryData.selectQueryMethod(query)
+    return data
+
+def addFilesData(parsedData,fileData):
+    parsedData["file_data"] = []
+    for x in fileData:
+        parsedData["file_data"].append(
+            x
+        )  
+    return parsedData 

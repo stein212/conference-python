@@ -58,4 +58,5 @@ def parseData(session,pollCount):
     return response
 
 
+# 15:37:15	SELECT poll_answer.poll_answer,COUNT(DISTINCT poll_answer.poll_answer) FROM poll INNER JOIN poll_answer ON poll.poll_id = poll_answer.poll_id WHERE poll.session_id =1 group by poll.session_id LIMIT 0, 50000	Error Code: 1055. Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'dbtest2809.poll_answer.poll_answer' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by	0.0032 sec
 
