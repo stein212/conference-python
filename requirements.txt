@@ -1,2 +1,8 @@
 flask
 flask-restful
+cryptography
+pymysql
+pyfcm
+validate_email==1.3
+picker==0.2
+
