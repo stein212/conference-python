@@ -1,4 +1,6 @@
 flask
+flask_cors
+flask_httpauth
 flask-restful
 cryptography
 pymysql
